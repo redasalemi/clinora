@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "report_id": "00000000-0000-4000-8000-000000000002",
+  "created_at": "2026-09-02T14:30:00+08:00",
+  "updated_at": "2026-09-02T14:30:00+08:00",
+  "participant_context": {
+    "age_band": "50-64",
+    "sex": "male",
+    "population_code": "test_population_a"
+  },
+  "period": {
+    "start": "2026-02-16",
+    "end": "2026-08-14"
+  },
+  "supports": [
+    {
+      "uid": "s2-sup-1",
+      "type": "Individual exercise physiology, home visits",
+      "frequency_count": null,
+      "frequency_per": "fortnight",
+      "duration_minutes": 45
+    }
+  ],
+  "goals": [
+    {
+      "uid": "s2-g1",
+      "ndis_goal_text": "I want to return to playing lawn bowls at my club.",
+      "therapy_goal_text": "Improve standing tolerance and lower limb strength for sport participation.",
+      "status": "not_achieved",
+      "linked_measure_uids": []
+    },
+    {
+      "uid": "s2-g2",
+      "ndis_goal_text": "I want to open jars and carry my shopping bags.",
+      "therapy_goal_text": "Improve grip and upper limb strength for daily tasks.",
+      "status": "partially_achieved",
+      "linked_measure_uids": [
+        "s2-m-grip"
+      ]
+    },
+    {
+      "uid": "s2-g3",
+      "ndis_goal_text": "I want to get in and out of the car by myself.",
+      "therapy_goal_text": "Improve lower limb strength for transfers.",
+      "status": "achieved",
+      "linked_measure_uids": [
+        "s2-m-sts5"
+      ]
+    },
+    {
+      "uid": "s2-g4",
+      "ndis_goal_text": "I want to walk my dog around the block.",
+      "therapy_goal_text": "Increase walking capacity over short community distances.",
+      "status": "partially_achieved",
+      "linked_measure_uids": [
+        "s2-m-deleted"
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "uid": "s2-m-grip",
+      "test_id": "GRIP",
+      "baseline_value": null,
+      "baseline_date": null,
+      "current_value": 24.5,
+      "current_date": "2026-08-10",
+      "same_conditions": true
+    },
+    {
+      "uid": "s2-m-sts5",
+      "test_id": "STS5",
+      "baseline_value": 18.4,
+      "baseline_date": "2026-02-16",
+      "current_value": 14.2,
+      "current_date": "2026-08-10",
+      "same_conditions": true
+    },
+    {
+      "uid": "s2-m-2mwt",
+      "test_id": "2MWT",
+      "baseline_value": 95,
+      "baseline_date": "2026-02-16",
+      "current_value": 101,
+      "current_date": "2026-08-10",
+      "same_conditions": true
+    }
+  ],
+  "barriers": [
+    {
+      "uid": "s2-b1",
+      "text": "Shoulder pain flare limited upper limb loading for several weeks.",
+      "goal_uids": [
+        "s2-g2"
+      ]
+    },
+    {
+      "uid": "s2-b2",
+      "text": "Irregular weekend routine, walks often skipped.",
+      "goal_uids": [
+        "s2-g4"
+      ]
+    },
+    {
+      "uid": "s2-b3",
+      "text": "Transport difficulties getting to the club.",
+      "goal_uids": []
+    }
+  ],
+  "risks": [],
+  "recommendations": [
+    {
+      "uid": "s2-c1",
+      "text": "Continue home-based exercise physiology.",
+      "goal_uids": []
+    },
+    {
+      "uid": "s2-c2",
+      "text": "Add a grip strengthening home program.",
+      "goal_uids": [
+        "s2-g2"
+      ]
+    }
+  ],
+  "shorthand": "\n\ngrip R only today, forgot baseline??\n  \nSTS5 no arms, same chair\n2mwt hallway loop, stopped once\n\n",
+  "gap_overrides": [],
+  "generated": null,
+  "approval": {
+    "attested": false,
+    "clinician_name": "",
+    "approved_at": null
+  }
+}

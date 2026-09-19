@@ -1,0 +1,121 @@
+{
+  "population_labels": {
+    "test_population_a": "FAKE test population A (fixtures only)"
+  },
+  "rows": [
+    {
+      "id": "FAKE-6MWT-01",
+      "test_id": "6MWT",
+      "population_code": "test_population_a",
+      "age_bands": null,
+      "metric": "MDC95",
+      "value": 30,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-2MWT-02",
+      "test_id": "2MWT",
+      "population_code": "test_population_a",
+      "age_bands": [
+        "18-34",
+        "35-49",
+        "50-64"
+      ],
+      "metric": "MCID",
+      "value": 11,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-TUG-03",
+      "test_id": "TUG",
+      "population_code": "test_population_a",
+      "age_bands": null,
+      "metric": "MDC95",
+      "value": 3.0,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-STS30-04",
+      "test_id": "STS30",
+      "population_code": "test_population_a",
+      "age_bands": null,
+      "metric": "MCID",
+      "value": 2,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-STS5-05",
+      "test_id": "STS5",
+      "population_code": "test_population_a",
+      "age_bands": [
+        "65-74",
+        "75+"
+      ],
+      "metric": "MDC95",
+      "value": 1.5,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-GRIP-06",
+      "test_id": "GRIP",
+      "population_code": "test_population_a",
+      "age_bands": null,
+      "metric": "MCID",
+      "value": 2.5,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-GAIT10-07",
+      "test_id": "GAIT10",
+      "population_code": "test_population_a",
+      "age_bands": null,
+      "metric": "MDC95",
+      "value": 0.15,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    },
+    {
+      "id": "FAKE-BERG-08",
+      "test_id": "BERG",
+      "population_code": "test_population_a",
+      "age_bands": [
+        "65-74",
+        "75+"
+      ],
+      "metric": "MDC95",
+      "value": 3,
+      "citation": "FAKE FIXTURE, NOT A REAL SOURCE",
+      "url": "https://example.invalid/fake-fixture-not-a-real-source",
+      "verified_by": "FAKE_FIXTURE_NOT_AN_AEP",
+      "verified_on": "2000-01-01",
+      "status": "verified"
+    }
+  ]
+}

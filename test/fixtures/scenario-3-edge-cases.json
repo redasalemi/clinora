@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "report_id": "00000000-0000-4000-8000-000000000003",
+  "created_at": "2026-09-03T11:15:00+08:00",
+  "updated_at": "2026-09-03T11:15:00+08:00",
+  "participant_context": {
+    "age_band": "75+",
+    "sex": "not_stated",
+    "population_code": "test_population_a"
+  },
+  "period": {
+    "start": "2026-01-12",
+    "end": "2026-07-10"
+  },
+  "supports": [
+    {
+      "uid": "s3-sup-1",
+      "type": "Group exercise physiology class",
+      "frequency_count": 1,
+      "frequency_per": "week",
+      "duration_minutes": 60
+    }
+  ],
+  "goals": [
+    {
+      "uid": "s3-g1",
+      "ndis_goal_text": "I want to walk across the road before the lights change.",
+      "therapy_goal_text": "Maintain gait speed for safe community crossings.",
+      "status": "achieved",
+      "linked_measure_uids": [
+        "s3-m-gait10"
+      ]
+    },
+    {
+      "uid": "s3-g2",
+      "ndis_goal_text": "I want to go on walks at the park with my grandchildren.",
+      "therapy_goal_text": "Increase walking endurance on outdoor surfaces.",
+      "status": "partially_achieved",
+      "linked_measure_uids": [
+        "s3-m-6mwt",
+        "s3-m-gait10"
+      ]
+    },
+    {
+      "uid": "s3-g3",
+      "ndis_goal_text": "I want to stand up from low chairs without pushing off.",
+      "therapy_goal_text": "Develop lower limb strength for transfers from low surfaces.",
+      "status": "not_achieved",
+      "linked_measure_uids": [
+        "s3-m-sts30",
+        "s3-m-tug"
+      ]
+    }
+  ],
+  "measures": [
+    {
+      "uid": "s3-m-gait10",
+      "test_id": "GAIT10",
+      "baseline_value": 0.45,
+      "baseline_date": "2026-01-12",
+      "current_value": 0.45,
+      "current_date": "2026-07-06",
+      "same_conditions": true
+    },
+    {
+      "uid": "s3-m-6mwt",
+      "test_id": "6MWT",
+      "baseline_value": 210,
+      "baseline_date": "2026-01-12",
+      "current_value": 265,
+      "current_date": "2026-07-06",
+      "same_conditions": false
+    },
+    {
+      "uid": "s3-m-sts30",
+      "test_id": "STS30",
+      "baseline_value": 0,
+      "baseline_date": "2026-01-12",
+      "current_value": 5,
+      "current_date": "2026-07-06",
+      "same_conditions": true
+    },
+    {
+      "uid": "s3-m-tug",
+      "test_id": "TUG",
+      "baseline_value": 12.0,
+      "baseline_date": "2026-01-12",
+      "current_value": 16.5,
+      "current_date": "2026-07-06",
+      "same_conditions": true
+    }
+  ],
+  "barriers": [
+    {
+      "uid": "s3-b1",
+      "text": "Baseline 6MWT done with a single point stick, retest done with a four wheeled walker after a change in aid.",
+      "goal_uids": [
+        "s3-g2"
+      ]
+    },
+    {
+      "uid": "s3-b2",
+      "text": "Knee pain on loaded flexion limits sit-to-stand training volume.",
+      "goal_uids": [
+        "s3-g3"
+      ]
+    }
+  ],
+  "risks": [],
+  "recommendations": [
+    {
+      "uid": "s3-c1",
+      "text": "Continue group exercise physiology with an added individual review each quarter.",
+      "goal_uids": [
+        "s3-g2",
+        "s3-g3"
+      ]
+    }
+  ],
+  "shorthand": "",
+  "gap_overrides": [],
+  "generated": null,
+  "approval": {
+    "attested": false,
+    "clinician_name": "",
+    "approved_at": null
+  }
+}
