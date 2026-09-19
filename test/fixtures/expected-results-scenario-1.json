@@ -1,0 +1,204 @@
+{
+  "_note": "FAKE TEST EXPECTATIONS. Derived from SPEC.md sections 4 and 5.3 to 5.5 using fake-thresholds.json only. Not clinical data.",
+  "scenarios": {
+    "scenario-1-clean.json": {
+      "report_id": "00000000-0000-4000-8000-000000000001",
+      "expected_flags_R1_R4": [],
+      "cut_rules_would_fire_R5_R6": [],
+      "measures": {
+        "s1-m-tug": {
+          "test_id": "TUG",
+          "improvement": 5.0,
+          "pct": 25.0,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 5.0 s (25.0%)",
+          "threshold_row_id": "FAKE-TUG-03",
+          "class": "IMPROVED_BEYOND_THRESHOLD",
+          "threshold_phrase": "which exceeds the published MDC95 of 3.0 s for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE)"
+        },
+        "s1-m-6mwt": {
+          "test_id": "6MWT",
+          "improvement": 20.0,
+          "pct": 6.7,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 20 m (6.7%)",
+          "threshold_row_id": "FAKE-6MWT-01",
+          "class": "WITHIN_THRESHOLD",
+          "threshold_phrase": "which does not exceed the published MDC95 of 30 m for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE), so it cannot be distinguished from measurement error"
+        },
+        "s1-m-berg": {
+          "test_id": "BERG",
+          "improvement": 2.0,
+          "pct": 5.0,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 2 points (5.0%)",
+          "threshold_row_id": "FAKE-BERG-08",
+          "class": "WITHIN_THRESHOLD",
+          "threshold_phrase": "which does not exceed the published MDC95 of 3 points for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE), so it cannot be distinguished from measurement error"
+        },
+        "s1-m-sts30": {
+          "test_id": "STS30",
+          "improvement": 4.0,
+          "pct": 50.0,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 4 reps (50.0%)",
+          "threshold_row_id": "FAKE-STS30-04",
+          "class": "IMPROVED_BEYOND_THRESHOLD",
+          "threshold_phrase": "which exceeds the published MCID of 2 reps for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE)"
+        }
+      },
+      "required_sentences": [],
+      "shorthand_line_count": 4
+    },
+    "report_scenario_2_messy.json": {
+      "report_id": "00000000-0000-4000-8000-000000000002",
+      "expected_flags_R1_R4": [
+        {
+          "rule_id": "R1",
+          "severity": "critical",
+          "target_uid": "s2-g1",
+          "target_label": "Goal 1",
+          "message": "Goal 1 has no linked measure."
+        },
+        {
+          "rule_id": "R1",
+          "severity": "critical",
+          "target_uid": "s2-g4",
+          "target_label": "Goal 4",
+          "message": "Goal 4 has no linked measure."
+        },
+        {
+          "rule_id": "R2",
+          "severity": "critical",
+          "target_uid": "s2-m-grip",
+          "target_label": "Grip Strength",
+          "message": "Grip Strength has no baseline value, so change cannot be calculated."
+        },
+        {
+          "rule_id": "R4",
+          "severity": "non-critical",
+          "target_uid": "s2-g1",
+          "target_label": "Goal 1",
+          "message": "Goal 1 is not fully achieved and has no linked barrier."
+        }
+      ],
+      "cut_rules_would_fire_R5_R6": [
+        {
+          "rule_id": "R5",
+          "target_uid": "s2-c1",
+          "message": "Recommendation 1 is not linked to a goal."
+        },
+        {
+          "rule_id": "R6",
+          "target_uid": "s2-sup-1",
+          "message": "Support 1 is missing frequency or duration."
+        }
+      ],
+      "measures": {
+        "s2-m-grip": {
+          "test_id": "GRIP",
+          "class": "NO_BASELINE",
+          "change_phrase": "no baseline was recorded, so change cannot be calculated",
+          "threshold_phrase": ""
+        },
+        "s2-m-sts5": {
+          "test_id": "STS5",
+          "improvement": 4.2,
+          "pct": 22.8,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 4.2 s (22.8%)",
+          "threshold_row_id": null,
+          "class": "NO_VERIFIED_THRESHOLD",
+          "threshold_phrase": "for which no verified change threshold is available for this population"
+        },
+        "s2-m-2mwt": {
+          "test_id": "2MWT",
+          "improvement": 6.0,
+          "pct": 6.3,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 6 m (6.3%)",
+          "threshold_row_id": "FAKE-2MWT-02",
+          "class": "WITHIN_THRESHOLD",
+          "threshold_phrase": "which does not exceed the published MCID of 11 m for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE), so it is below the published threshold for meaningful change"
+        }
+      },
+      "required_sentences": [
+        {
+          "step": 3,
+          "text": "[[G1.label]] has no linked measure."
+        },
+        {
+          "step": 3,
+          "text": "[[G4.label]] has no linked measure."
+        },
+        {
+          "step": 5,
+          "text": "No risks were recorded for this reporting period."
+        }
+      ],
+      "shorthand_line_count": 3
+    },
+    "report_scenario_3_edge.json": {
+      "report_id": "00000000-0000-4000-8000-000000000003",
+      "expected_flags_R1_R4": [
+        {
+          "rule_id": "R3",
+          "severity": "non-critical",
+          "target_uid": "s3-m-6mwt",
+          "target_label": "6-Minute Walk Test",
+          "message": "6-Minute Walk Test was measured under different conditions or aids, so the change is not directly comparable."
+        }
+      ],
+      "cut_rules_would_fire_R5_R6": [],
+      "measures": {
+        "s3-m-gait10": {
+          "test_id": "GAIT10",
+          "improvement": 0.0,
+          "pct": 0.0,
+          "direction_label": "unchanged",
+          "change_phrase": "no change",
+          "threshold_row_id": "FAKE-GAIT10-07",
+          "class": "WITHIN_THRESHOLD",
+          "threshold_phrase": "which does not exceed the published MDC95 of 0.15 m/s for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE), so it cannot be distinguished from measurement error"
+        },
+        "s3-m-6mwt": {
+          "test_id": "6MWT",
+          "improvement": 55.0,
+          "pct": 26.2,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 55 m (26.2%)",
+          "threshold_row_id": "FAKE-6MWT-01",
+          "class": "NOT_COMPARABLE",
+          "threshold_phrase": "measured under different conditions, so the change is not directly comparable"
+        },
+        "s3-m-sts30": {
+          "test_id": "STS30",
+          "improvement": 5.0,
+          "pct": null,
+          "direction_label": "improved",
+          "change_phrase": "an improvement of 5 reps",
+          "threshold_row_id": "FAKE-STS30-04",
+          "class": "IMPROVED_BEYOND_THRESHOLD",
+          "threshold_phrase": "which exceeds the published MCID of 2 reps for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE)"
+        },
+        "s3-m-tug": {
+          "test_id": "TUG",
+          "improvement": -4.5,
+          "pct": 37.5,
+          "direction_label": "declined",
+          "change_phrase": "a decline of 4.5 s (37.5%)",
+          "threshold_row_id": "FAKE-TUG-03",
+          "class": "DECLINED_BEYOND_THRESHOLD",
+          "threshold_phrase": "which exceeds the published MDC95 of 3.0 s for FAKE test population A (fixtures only) (FAKE FIXTURE, NOT A REAL SOURCE)"
+        }
+      },
+      "required_sentences": [
+        {
+          "step": 5,
+          "text": "No risks were recorded for this reporting period."
+        }
+      ],
+      "shorthand_line_count": 0
+    }
+  }
+}
