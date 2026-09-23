@@ -49,4 +49,10 @@ Plan first. Build one slice per session. Commit after every green slice.
 Where SPEC.md is silent, pick the simplest option, mark it [A] in the code comment or PR note, and continue. Do not ask.
 Commands
 
-Record the install, dev, test, typecheck and lint commands here on first setup. Do not guess them.
+npm workspaces (packages/engine, apps/web). Run from the repo root.
+Install:   npm install
+Dev:       npm run dev            (apps/web only, via next dev)
+Build:     npm run build          (apps/web only, via next build)
+Test:      npm run test           (both workspaces, via vitest run)
+Typecheck: npm run typecheck      (both workspaces, via tsc --noEmit)
+Lint: not set up yet. Record the real command here when it is — do not guess one.
