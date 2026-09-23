@@ -5,9 +5,9 @@
  * authoritative. SPEC.md section 5.
  *
  * Built so far: 5.1 measure definitions, 5.2 input handling, 5.3 change
- * calculation, 5.4 threshold matching, 5.5 classification and phrases.
- * Gap rules (section 4), token resolution and validation (5.9) are later
- * slices.
+ * calculation, 5.4 threshold matching, 5.5 classification and phrases,
+ * section 4 gap rules R1-R4 (R5/R6 cut, NOT-NOW.md item 6). Token resolution
+ * and validation (5.9) are a later slice.
  */
 
 export {
@@ -28,6 +28,7 @@ export {
   type AgeBand,
   type ChangeClass,
   type DirectionLabel,
+  type GoalStatus,
   type ParticipantContext,
   type PopulationCode,
 } from "./types";
@@ -76,3 +77,15 @@ export {
 } from "./classify";
 
 export { THRESHOLDS, verifiedThresholdRowCount } from "./data";
+
+export {
+  evaluateGaps,
+  flagKey,
+  type Flag,
+  type GapBarrier,
+  type GapCheckDraft,
+  type GapGoal,
+  type GapMeasure,
+  type RuleId,
+  type Severity,
+} from "./gaps";

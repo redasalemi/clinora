@@ -29,6 +29,9 @@ export type ChangeClass =
 
 export type DirectionLabel = "improved" | "declined" | "unchanged";
 
+/** SPEC.md 2.2. */
+export type GoalStatus = "achieved" | "partially_achieved" | "not_achieved";
+
 /** Participant context the engine needs. No identifying fields (SPEC.md 2.2). */
 export interface ParticipantContext {
   age_band: AgeBand | null;
