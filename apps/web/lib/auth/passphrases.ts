@@ -25,6 +25,21 @@ function timingSafeStringEqual(a: string, b: string): boolean {
 
 export function isValidPassphrase(candidate: string): boolean {
   const allowlist = getAllowlist();
+
+  // [A] Diagnostic only — never sent in the HTTP response (the route always
+  // returns the same generic redirect either way, see route.ts), just a
+  // server-console signal for the easy-to-hit case where AUTH_TESTER_PASSPHRASES
+  // is empty or unset at request time. Most common cause: a shell-exported
+  // AUTH_TESTER_PASSPHRASES (even "") shadows .env.local — Next.js only fills
+  // in a var from .env.local when it isn't already present in process.env, it
+  // never overrides one that's already set. Check with `echo $AUTH_TESTER_PASSPHRASES`
+  // in the shell the dev server was started from, and unset it there if present.
+  if (allowlist.length === 0) {
+    console.warn(
+      "[auth] AUTH_TESTER_PASSPHRASES is empty or unset — every passphrase will be rejected.",
+    );
+  }
+
   let matched = false;
   for (const passphrase of allowlist) {
     if (timingSafeStringEqual(candidate, passphrase)) matched = true;

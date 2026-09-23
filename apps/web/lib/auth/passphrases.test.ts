@@ -44,4 +44,20 @@ describe("isValidPassphrase", () => {
     vi.stubEnv("AUTH_TESTER_PASSPHRASES", "alpha-fake,,bravo-fake,");
     expect(isValidPassphrase("")).toBe(false);
   });
+
+  it("warns on the server console when the allowlist is empty, so a misread env var is diagnosable", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    vi.stubEnv("AUTH_TESTER_PASSPHRASES", "");
+    isValidPassphrase("anything");
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining("AUTH_TESTER_PASSPHRASES"));
+    warn.mockRestore();
+  });
+
+  it("does not warn when the allowlist is configured", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    vi.stubEnv("AUTH_TESTER_PASSPHRASES", "alpha-fake");
+    isValidPassphrase("alpha-fake");
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
 });
