@@ -278,7 +278,7 @@ Persistence: `localStorage` key `cw_draft_v1`. On app load, if `updated_at` is o
     "test_id": TestId,
     "population_code": string,
     "age_bands": AgeBand[] | null,      // null = all bands
-    "metric": "MDC95" | "MCID",
+    "metric": "MDC95" | "MDC90" | "MCID",
     "value": number,                    // > 0, in the test's unit
     "citation": string,                 // short, e.g. "Author Year"
     "url": string,
@@ -287,6 +287,8 @@ Persistence: `localStorage` key `cw_draft_v1`. On app load, if `updated_at` is o
     "status": "verified" | "unverified"
   } ] }
 ```
+
+MDC90 values carry a lower confidence bound than MDC95 (90% vs 95%) and must never be relabeled as MDC95.
 
 Boot-time schema validation (zod) fails the build if a row is malformed.
 

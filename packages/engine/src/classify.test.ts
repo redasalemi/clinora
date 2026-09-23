@@ -214,6 +214,40 @@ describe("classification precedence table (SPEC 5.5)", () => {
     );
   });
 
+  it("row 6: MDC90 uses the MDC95-style wording, not the MCID wording (SPEC 2.3)", () => {
+    const mdc90File = parseThresholdFile(
+      {
+        population_labels: { test_population_a: FAKE_LABEL },
+        rows: [
+          {
+            id: "FAKE-MDC90-TUG",
+            test_id: "TUG",
+            population_code: "test_population_a",
+            age_bands: null,
+            metric: "MDC90",
+            value: 3.0,
+            citation: FAKE_CITE,
+            url: "",
+            verified_by: "FAKE_FIXTURE_NOT_AN_AEP",
+            verified_on: "2000-01-01",
+            status: "verified",
+          },
+        ],
+      },
+      "mdc90 fixture",
+    );
+    const result = evaluate(
+      { test_id: "TUG", baseline_value: 20.0, current_value: 17.0, same_conditions: true },
+      CONTEXT,
+      mdc90File,
+    );
+    expect(result.class).toBe("WITHIN_THRESHOLD");
+    expect(result.threshold_phrase).toBe(
+      `which does not exceed the published MDC90 of 3.0 s for ${FAKE_LABEL} (${FAKE_CITE}), ` +
+        "so it cannot be distinguished from measurement error",
+    );
+  });
+
   it("treats a null same_conditions as not explicitly different", () => {
     const result = evaluate({
       test_id: "TUG",

@@ -9,7 +9,7 @@
 import { isTestId, type TestId } from "../../../data/measures";
 import { isAgeBand, POPULATION_OTHER, type AgeBand, type PopulationCode } from "./types";
 
-export type ThresholdMetric = "MDC95" | "MCID";
+export type ThresholdMetric = "MDC95" | "MDC90" | "MCID";
 
 export type ThresholdStatus = "verified" | "unverified";
 
@@ -48,18 +48,23 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function isMetric(value: unknown): value is ThresholdMetric {
-  return value === "MDC95" || value === "MCID";
+  return value === "MDC95" || value === "MDC90" || value === "MCID";
 }
 
 /**
  * Boot-time schema validation. SPEC.md 2.3 says zod; zod is not a dependency
  * yet and CLAUDE.md says to ask before adding one, so this is a hand-rolled
- * check with the same effect: a malformed row throws at import time. [A]
+ * check with the same effect: a malformed row throws at import time. This is
+ * a deliberate, ongoing deviation from SPEC.md 2.3, not a placeholder pending
+ * a zod install. [A]
  *
- * [A] A row whose `metric` is neither MDC95 nor MCID is a hard error when the
- *     row is verified, and is dropped when it is unverified. Dropping keeps
- *     the parsed rows honestly typed without failing the build on rows that
- *     can never be used as a candidate anyway (5.4.1).
+ * [A] A row whose `metric` is none of MDC95, MDC90 or MCID (SPEC.md 2.3) is a
+ *     hard error when the row is verified, and is dropped when it is
+ *     unverified. Dropping keeps the parsed rows honestly typed without
+ *     failing the build on rows that can never be used as a candidate anyway
+ *     (5.4.1). MDC90 itself is a normal, fully supported metric here — it
+ *     parses, matches and is usable once verified exactly like MDC95 and
+ *     MCID; only a genuinely unrecognised string hits the drop/throw path.
  */
 export function parseThresholdFile(raw: unknown, source = "threshold file"): ThresholdFile {
   if (!isRecord(raw)) {

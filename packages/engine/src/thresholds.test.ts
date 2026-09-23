@@ -65,13 +65,24 @@ describe("threshold file parsing (SPEC 2.3)", () => {
   });
 
   it("throws when a verified row has an unsupported metric or a non-positive value", () => {
-    expect(() => fileWith([{ metric: "MDC90" }])).toThrow(ThresholdFileError);
+    expect(() => fileWith([{ metric: "NOT_A_REAL_METRIC" }])).toThrow(ThresholdFileError);
     expect(() => fileWith([{ value: 0 }])).toThrow(ThresholdFileError);
   });
 
   it("drops an unverified row with an unsupported metric instead of failing the build", () => {
-    const file = fileWith([{ metric: "MDC90", status: "unverified" }]);
+    const file = fileWith([{ metric: "NOT_A_REAL_METRIC", status: "unverified" }]);
     expect(file.rows).toHaveLength(0);
+  });
+
+  it("accepts MDC90 as a normal supported metric, verified or not (SPEC 2.3)", () => {
+    const verified = fileWith([{ id: "FAKE-MDC90-V", metric: "MDC90" }]);
+    expect(verified.rows).toHaveLength(1);
+    expect(verified.rows[0]?.metric).toBe("MDC90");
+
+    // Kept as a normal unverified row, not dropped as an unsupported metric.
+    const unverified = fileWith([{ metric: "MDC90", status: "unverified" }]);
+    expect(unverified.rows).toHaveLength(1);
+    expect(unverified.rows[0]?.metric).toBe("MDC90");
   });
 });
 

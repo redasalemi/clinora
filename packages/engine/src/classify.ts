@@ -76,14 +76,20 @@ export function buildExceedsPhrase(
   return `which exceeds ${thresholdDescriptor(row, measure, file)}`;
 }
 
-/** SPEC.md 5.5 row 6. */
+/**
+ * SPEC.md 5.5 row 6. The table there only spells out MDC95 and MCID wording;
+ * MDC90 is an MDC statistic too (a minimal-detectable-change bound, just at
+ * 90% rather than 95% confidence — SPEC.md 2.3), so it gets the same
+ * measurement-error wording as MDC95, not the MCID wording, which is about
+ * clinical meaningfulness rather than measurement noise. [A]
+ */
 export function buildWithinPhrase(
   row: ThresholdRow,
   measure: MeasureDefinition,
   file: ThresholdFile,
 ): string {
   const tail =
-    row.metric === "MDC95"
+    row.metric === "MDC95" || row.metric === "MDC90"
       ? "so it cannot be distinguished from measurement error"
       : "so it is below the published threshold for meaningful change";
   return `which does not exceed ${thresholdDescriptor(row, measure, file)}, ${tail}`;
