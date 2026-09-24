@@ -105,18 +105,47 @@ describe("buildSystemPrompt: P1-P7 are each present (SPEC 5.9)", () => {
     expect(prompt).toContain("Step 3 covers every goal in order");
   });
 
+  it("P4: steps 4-6 require B/R/C evidence per sentence, no unlinked intro/summary sentences (addresses a real V7 failure)", () => {
+    expect(prompt).toContain(
+      "In steps 4, 5 and 6, every single sentence must contain a [[B<n>.text]], [[R<n>.text]] or [[C<n>.text]] token respectively",
+    );
+    expect(prompt.toLowerCase()).toContain("do not add an unlinked introductory or summary sentence");
+  });
+
   it('P5: banned words are explicitly named (H7 wording)', () => {
     expect(prompt).toContain("clinically significant");
     expect(prompt).toContain("compliant");
     expect(prompt).toContain("funding outcomes");
   });
 
-  it("P6: JSON-only, matches the exact schema, no markdown fences", () => {
+  it("P6: JSON-only, matches the exact schema, explicitly forbids markdown fences/backticks (addresses a real V1 failure)", () => {
     expect(prompt).toContain("Output JSON only");
-    expect(prompt).toContain("No markdown code fences");
+    expect(prompt).toContain("Do not wrap it in markdown code fences or backticks");
+    expect(prompt).toContain("```json");
+    expect(prompt).toContain("must start with { and end with }");
     expect(prompt).toContain(
       '{ "sections": [ { "step": 1..6, "sentences": [ { "text": string, "sources": string[] } ] } ] }',
     );
+  });
+
+  it("repeats the no-markdown-fences, steps-4-6-evidence and change_phrase-verb rules as a final reminder near the end (recency)", () => {
+    const finalReminderIndex = prompt.indexOf("--- Final reminders ---");
+    expect(finalReminderIndex).toBeGreaterThan(-1);
+    const finalSection = prompt.slice(finalReminderIndex);
+    expect(finalSection).toContain("Output raw JSON only");
+    expect(finalSection.toLowerCase()).toContain("markdown code fences");
+    expect(finalSection).toContain("no unlinked intro or summary sentence");
+    expect(finalSection).toContain("linking verb");
+    // It really is near the end, not just present somewhere.
+    expect(finalReminderIndex).toBeGreaterThan(prompt.length * 0.8);
+  });
+
+  it("change_phrase needs a linking verb before it: instructed with a concrete right/wrong example (real prose bug: \"The Timed Up and Go an improvement of 5.0 s\" with no verb)", () => {
+    expect(prompt).toContain(
+      '"[[M1.name]] showed [[M1.change_phrase]]", never "[[M1.name]] [[M1.change_phrase]]" with no verb between them',
+    );
+    expect(prompt.toLowerCase()).toContain("noun phrase");
+    expect(prompt).toContain('"showed", "demonstrated" or "recorded"');
   });
 
   it("P7: required sentences are listed verbatim, with an instruction not to paraphrase", () => {

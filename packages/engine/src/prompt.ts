@@ -140,6 +140,8 @@ export function buildSystemPrompt(context: PromptContext): string {
     "  R<n> (one per risk): text",
     "  C<n> (one per recommendation): text",
     "  P (the reporting period): start, end",
+    "",
+    'A [[M<n>.change_phrase]] token resolves to a noun phrase, such as "an improvement of ..." or "a decline of ..." — not a full sentence. Always put a linking verb such as "showed", "demonstrated" or "recorded" immediately before it: write "[[M1.name]] showed [[M1.change_phrase]]", never "[[M1.name]] [[M1.change_phrase]]" with no verb between them. A [[M<n>.threshold_phrase]] token resolves to a clause that already starts with "which" or "for which", so it reads naturally right after change_phrase with just a comma: "[[M1.name]] showed [[M1.change_phrase]], [[M1.threshold_phrase]]."',
   ].join("\n");
 
   const measureLines = context.measures.length
@@ -197,13 +199,13 @@ export function buildSystemPrompt(context: PromptContext): string {
     "P3. Do not diagnose. Do not recommend supports, hours, or treatment, and do not add any recommendation of your own — recommendations come only from the clinician's own text via [[C<n>.text]] tokens. In step 6, you may only frame the clinician's own recommendations; never originate one.",
     "",
     // P4
-    "P4. Section content: Step 1 summarises baseline capacity using the available baseline tokens. Step 2 lists the measures used with their dates. Step 3 covers every goal in order, using its status and its linked measures' change_phrase and threshold_phrase tokens. Steps 4 to 6 cover barriers, risks and recommendations respectively.",
+    "P4. Section content: Step 1 summarises baseline capacity using the available baseline tokens. Step 2 lists the measures used with their dates. Step 3 covers every goal in order, using its status and its linked measures' change_phrase and threshold_phrase tokens. Steps 4 to 6 cover barriers, risks and recommendations respectively. In steps 4, 5 and 6, every single sentence must contain a [[B<n>.text]], [[R<n>.text]] or [[C<n>.text]] token respectively (matching that step's evidence family), or be one of the required sentences listed under P7 below. Do not add an unlinked introductory or summary sentence to steps 4, 5 or 6 — for example, do not write a sentence like \"The following barriers were identified\" or \"Two risks were noted\" that names no barrier/risk/recommendation token itself. Every sentence in those three steps must stand on a specific token, with nothing extra.",
     "",
     // P5
     'P5. Never use the words "clinically significant", "compliant", or any claim about funding outcomes.',
     "",
     // P6
-    "P6. Output JSON only, matching this schema exactly. No markdown code fences, no commentary before or after the JSON.",
+    "P6. Output JSON only, matching this schema exactly. Your entire response must be the raw JSON object itself and nothing else: it must start with { and end with }. Do not wrap it in markdown code fences or backticks. Do not write ```json, ```, or any other formatting marker anywhere in your response. No commentary before or after the JSON.",
     "",
     OUTPUT_SCHEMA_TEXT,
     "",
@@ -237,6 +239,12 @@ export function buildSystemPrompt(context: PromptContext): string {
     "",
     "Clinician shorthand notes:",
     shorthandLines,
+    "",
+    "--- Final reminders ---",
+    "",
+    "Output raw JSON only. Do not use markdown code fences or backticks anywhere. Your response must start with { and end with }.",
+    "Every sentence in steps 4, 5 and 6 must reference a B, R or C token (matching that step) or be one of the required sentences under P7 — no unlinked intro or summary sentence in those three steps.",
+    'Always put a linking verb (e.g. "showed", "demonstrated") before a change_phrase token — write "[[M1.name]] showed [[M1.change_phrase]]", never the two tokens back to back with no verb.',
   ].join("\n");
 }
 
