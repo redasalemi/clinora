@@ -1,4 +1,4 @@
-import { AnthropicBedrockMantle } from "@anthropic-ai/bedrock-sdk";
+import { AnthropicBedrock } from "@anthropic-ai/bedrock-sdk";
 
 /**
  * The only file in this app that calls out to Bedrock. H2 (CLAUDE.md):
@@ -7,10 +7,23 @@ import { AnthropicBedrockMantle } from "@anthropic-ai/bedrock-sdk";
  * or any non-AU LLM endpoint. Read the model ID and profile from env
  * BEDROCK_MODEL_ID. Never hardcode them."
  *
- * AnthropicBedrockMantle signs requests with AWS SigV4 and calls
- * bedrock-mantle.<region>.api.aws — never api.anthropic.com — so there is
- * no first-party Anthropic client anywhere in this app, and no
- * ANTHROPIC_API_KEY is read.
+ * AnthropicBedrock (NOT AnthropicBedrockMantle) signs requests with AWS
+ * SigV4 and calls bedrock-runtime.<region>.amazonaws.com — the standard AWS
+ * Bedrock Runtime service, the same one `aws bedrock-runtime converse`
+ * uses — never api.anthropic.com, so there is no first-party Anthropic
+ * client anywhere in this app and no ANTHROPIC_API_KEY is read.
+ *
+ * [A] Deliberately NOT AnthropicBedrockMantle, despite it being the
+ * @anthropic-ai/bedrock-sdk package's own recommended default for new code.
+ * Mantle targets bedrock-mantle.<region>.api.aws — a separate,
+ * Anthropic-operated routing layer with its own IAM action namespace
+ * (bedrock-mantle:CreateInference) and its own model/profile resolution,
+ * independent of standard AWS Bedrock provisioning. Verified live: the
+ * exact same inference-profile ARN that AWS CLI's `bedrock-runtime
+ * converse` invokes successfully was rejected by the Mantle endpoint at
+ * every layer (auth, permissions, and model lookup) until switching to
+ * this client. H2 says "Amazon Bedrock" — this is the literal AWS service
+ * by that name; Mantle is not.
  *
  * [A] The AWS region "ap-southeast-2" (Sydney) is a literal from SPEC.md
  * 5.9 ("region ap-southeast-2"), not something H2 asks to be env-derived —
@@ -38,7 +51,7 @@ export async function callBedrock({ systemPrompt, timeoutMs = 60_000 }: CallBedr
     throw new Error("BEDROCK_MODEL_ID is not set");
   }
 
-  const client = new AnthropicBedrockMantle({ awsRegion: AWS_REGION });
+  const client = new AnthropicBedrock({ awsRegion: AWS_REGION });
 
   const response = await client.messages.create(
     {
